@@ -1,4 +1,6 @@
 import React from 'react'
+import blogContent from './blog-content';
+import { Link } from 'react-router-dom';
 
 const BlogsList = () => {
   return (
@@ -6,7 +8,7 @@ const BlogsList = () => {
       <h1 className="sm:text-3xl text-2xl font-bold my-3 text-gray-500">
         Learnings
       </h1>
-      {/* <div className="container py-4 mx-auto">
+      <div className="container py-4 mx-auto">
         <div className="flex flex-wrap -m-4">
           {blogContent.map((blog, index) => ( 
           <div key={index} className="p-4 md:w-1/1">
@@ -26,7 +28,7 @@ const BlogsList = () => {
         </div>
           ))}
         </div>
-      </div> */}
+      </div>
     </div>
   )
 }

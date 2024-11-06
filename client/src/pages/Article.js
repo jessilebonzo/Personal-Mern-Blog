@@ -1,18 +1,21 @@
-import React from 'react'
+import React from 'react';
+import articleContent from "./article-content";
 
-const Article = () => {
+// Components
+import Articles from '../components/Articles'
+const ArticlesList = () => {
   return (
-    <div className="mb-20">
+      <div className="mb-20">
       <h1 className="sm:text-3xl text-2xl font-bold my-3 text-gray-500">
         Blogs
       </h1>
       <div className="container py-2 mx-auto">
-        {/* <div className="flex flex-wrap -m-4">
+        <div className="flex flex-wrap -m-4">
           <Articles articles={articleContent}/>
-        </div> */}
+        </div>
       </div>
     </div>
-  ); 
+  );
 };
 
-export default Article
+export default ArticlesList
