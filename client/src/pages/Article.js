@@ -9,6 +9,7 @@ import Articles from "../components/Articles";
 const Article = () => {
   const { name } = useParams();
   const article = articleContent.find((article) => article.name === name);
+  // eslint-disable-next-line no-unused-vars
   const [articleInfo, setArticleInfo] = useState({ comments: [] });
 
   useEffect(() =>{
