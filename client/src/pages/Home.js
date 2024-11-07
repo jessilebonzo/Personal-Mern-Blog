@@ -1,9 +1,22 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+
+import React, { useEffect } from 'react';
 import profileImage from '../assets/final.png';
 
 const Home = () => {
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = "https://apps.voc.ai/api_v2/gpt/bots/livechat/embed.js?id=19263&token=672CC18EE4B0187418032B8E";
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+
+    // Cleanup the script on component unmount
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
   return (
     <div className="flex flex-col items-center mb-10 mt-10 bg-gray-800 text-white p-8 rounded-lg m-4">
       <img 
@@ -57,8 +70,7 @@ const Home = () => {
       <path fill="#c62828" d="M3,12.298V16.2l10,7.5V11.2L9.876,8.859C9.132,8.301,8.228,8,7.298,8h0C4.924,8,3,9.924,3,12.298z"></path>
       <path fill="#fbc02d" d="M45,12.298V16.2l-10,7.5V11.2l3.124-2.341C38.868,8.301,39.772,8,40.702,8h0 C43.076,8,45,9.924,45,12.298z"></path>
       </svg></a>
-
-
+      
       </div>
     </div>
   );
