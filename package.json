@@ -1,0 +1,19 @@
+{
+  "name": "personal-mern-blog",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "server": "nodemon"
+  },
+  "keywords": [],
+  "author": "Jessile Bonzo",
+  "license": "ISC",
+  "description": "My Personal Blog",
+  "dependencies": {
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "nodemon": "^3.1.7"
+  }
+}
