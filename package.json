@@ -10,7 +10,8 @@
   "license": "ISC",
   "description": "My Personal Blog",
   "dependencies": {
-    "express": "^4.21.1"
+    "express": "^4.21.1",
+    "mongodb": "^6.10.0"
   },
   "devDependencies": {
     "concurrently": "^9.1.0",
