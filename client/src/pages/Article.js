@@ -5,16 +5,25 @@ import articleContent from './article-content';
 import NotFound from "./NotFound";
 // Components
 import Articles from "../components/Articles";
+import CommentsList from '../components/CommentsList';
+import AddCommentForm from '../components/AddCommentFrom';
 
 const Article = () => {
   const { name } = useParams();
   const article = articleContent.find((article) => article.name === name);
-  // eslint-disable-next-line no-unused-vars
-  const [articleInfo, setArticleInfo] = useState({ comments: [] });
 
-  useEffect(() =>{
-    console.log("Component Mounted");
-  });
+  const [articleInfo, setArticleInfo] = useState({ comments: [] });
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await fetch(`/api/articles/${name}`)
+      const body = await result.json()
+      setArticleInfo(body)
+      console.log(body)
+    }
+    fetchData();
+  }, [name]
+);
   
   if(!article) return <NotFound />;
   const otherArticles = articleContent.filter(article => article.name !== name);
@@ -28,6 +37,8 @@ const Article = () => {
           {paragraph}
         </p>
       ))}
+      <CommentsList comments={articleInfo.comments}/>
+      <AddCommentForm articleName={name} setArticleInfo={setArticleInfo} />
       <h1 className="sm:text-xl text-xl font-bold my-3 text-gray-500">
         Explore More
       </h1>
