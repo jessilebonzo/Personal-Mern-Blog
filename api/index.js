@@ -1,40 +1,47 @@
 const express = require("express");
-const app = express();
 const { MongoClient } = require("mongodb");
-const PORT = process.env.PORT || 8000;
 
+const app = express();
 app.use(express.json({ extended: false }));
 
+// Helper function to connect to MongoDB and execute operations
 const withDB = async (operations, res) => {
   try {
+    // Use the MongoDB URI from environment variables
     const client = await MongoClient.connect(
-      'mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.3',
+      process.env.MONGODB_URI, // MongoDB URI is now sourced from environment variables
       { useNewUrlParser: true, useUnifiedTopology: true }
     );
-    const db = client.db("personalmernblog");
+    const db = client.db("personalmernblog"); // Ensure this matches your database name in MongoDB Atlas
     await operations(db);
     client.close();
   } catch (error) {
-    console.log(error); // Log error for debugging
+    console.error(error); // Log error for debugging
     res.status(500).json({ message: "Error connecting to database", error });
   }
 };
 
+// GET endpoint to fetch article by name
 app.get('/api/articles/:name', async (req, res) => {
   withDB(async (db) => {
     const articleName = req.params.name;
     const articleInfo = await db
       .collection("articles")
       .findOne({ name: articleName });
-      
+
     if (articleInfo) {
-      res.status(200).json({ id: articleInfo._id, name: articleInfo.name, comments: articleInfo.comments });
+      res.status(200).json({
+        id: articleInfo._id,
+        name: articleInfo.name,
+        comments: articleInfo.comments,
+      });
     } else {
       res.status(404).json({ message: "Article not found" });
     }
   }, res);
 });
 
+// POST endpoint to add comments to an article
 app.post('/api/articles/:name/add-comments', (req, res) => {
   const { username, text } = req.body;
   const articleName = req.params.name;
@@ -43,13 +50,13 @@ app.post('/api/articles/:name/add-comments', (req, res) => {
     const articleInfo = await db
       .collection("articles")
       .findOne({ name: articleName });
-    
+
     if (articleInfo) {
       await db.collection("articles").updateOne(
         { name: articleName },
         {
           $set: {
-            comments: articleInfo.comments.concat({ username, text })
+            comments: articleInfo.comments.concat({ username, text }),
           },
         }
       );
@@ -65,4 +72,5 @@ app.post('/api/articles/:name/add-comments', (req, res) => {
   }, res);
 });
 
-app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
+// Export the app for serverless deployment
+module.exports = app;
