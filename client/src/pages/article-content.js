@@ -33,7 +33,7 @@ const articles = [
       `The 7 Habits of Highly Effective People (Habit 2: Begin with the End in Mind): Having an end in mind is no guarantee that you’ll reach it—no Stoic would tolerate that assumption—but not having an end in mind is a guarantee that you won’t.`,
       `Surrounded by Idiots: I discovered that I am a “Blue,” driven by the desire to comply and do things as they are meant to be done. Blue traits include being introverted, obedient, organized, meticulous, cautious, and private.`,
       `Favorite Book: The Alchemist: My favorite book so far is The Alchemist by Paulo Coelho. It explores the concept of people’s inability to choose their own Personal Legends and ends by revealing the world’s greatest lie. The book taught me that “when you want something, all the universe conspires in helping you to achieve it.” It emphasizes the importance of recognizing omens and following them, and how learning to understand the language without words can help me understand the world.`,
-      <a href="https://booksthatpiquemyinterest.netlify.app/" className="text-indigo-500" aria-label="lc">Books that pique my interest</a>
+      <a href="https://booksthatpiquemyinterest.netlify.app/" className="text-indigo-500" aria-label="lc" target="_blank" rel="noreferrer">Books that pique my interest</a>
     ],
   },
   {
